@@ -39,13 +39,10 @@ public class Tetromino : MonoBehaviour
             transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
             if(!ValidMove())
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
-
         }
-
 
         if (Time.time - _previusTime > (Input.GetKey(KeyCode.S) ? _fallTime / 10 : _fallTime))
         {
-            //PositionMovement();
             transform.position += new Vector3(0f, -1f, 0f);
             if (!ValidMove())
             {
@@ -56,10 +53,10 @@ public class Tetromino : MonoBehaviour
 
                 this.enabled = false;
 
-                if (transform.position.y >= _height - 3)
+                if (transform.position.y >= _height - 3) //Проверяет позицию фигуры по y и если она выше нужного то выводит канвас поражения
                 {
-                    GameObjectExtension.Find("Canvas").SetActive(true);
-                    Debug.Log("Вы проиграли");
+                    GameObjectExtension.Find("EndGameCanvas").SetActive(true);
+                    GameObjectExtension.Find("MainCanvas").SetActive(false);
                 }
                 else
                 {
