@@ -21,13 +21,19 @@ public class SpawnerTetromino : MonoBehaviour
     private void OnDisable()
     {
         foreach(GameObject tetromino in _tetrominoes)
+        {
+            tetromino.transform.localScale = new Vector3(1f, 1f);
             tetromino.GetComponent<Tetromino>().enabled = true;
+        } // Вернёт стандартные настройки
     }
 
     public void NewTetromino()
     {
         if (_tetromino != null)
+        {
             _tetromino.GetComponent<Tetromino>().enabled = true;
+            _tetromino.transform.localScale = new Vector3(1f, 1f);
+        }
         else
             _tetromino = _tetrominoes[Random.Range(0, _tetrominoes.Length)];
 
@@ -42,6 +48,7 @@ public class SpawnerTetromino : MonoBehaviour
         _tetromino = _tetrominoImage;
 
         _tetrominoImage.GetComponent<Tetromino>().enabled = false;
+        _tetrominoImage.transform.localScale = new Vector3(0.5f, 0.5f);
 
         _tetrominoImage = Instantiate(_tetrominoImage, testVector, Quaternion.identity);
     }

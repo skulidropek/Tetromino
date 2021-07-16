@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] _pointsText;
     [SerializeField] private static int _height = 20;
     [SerializeField] private static int _width = 10;
-    [SerializeField] private float _fallTime ;
+    [SerializeField] private float _fallTime;
 
     public static GameManager instance;
     public float FallTime { get => _fallTime; set => _fallTime = value; }
@@ -18,12 +18,14 @@ public class GameManager : MonoBehaviour
     public int Points { get => _points; set => _points = value; }
 
     private Transform[,] _grid = new Transform[_width, _height];
-   // private float _previusTime;
     private int _points;
+    private int _timer;
 
-   // private Tetromino _tetromino;
-
-    void Awake()
+    private void Start()
+    {
+        StartCoroutine(Timer());
+    }
+    private void Awake()
     {
         if (instance == null)
             instance = this;
@@ -32,9 +34,24 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void Update()
+    private void Update()
     {
-        foreach(TextMeshProUGUI _point in _pointsText)
+        if(_timer > 60 && 0.1f < _fallTime)
+        {
+            _timer = 0;
+            _fallTime -= 0.05f;
+        }
+
+        foreach (TextMeshProUGUI _point in _pointsText)
             _point.text = $"{_points}";
+    }
+
+    private IEnumerator Timer()
+    {
+        while (true)
+        {
+            _timer++;
+            yield return new WaitForSeconds(1);
+        }
     }
 }

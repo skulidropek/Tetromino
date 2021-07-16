@@ -459,7 +459,7 @@ MonoBehaviour:
   _pointsText:
   - {fileID: 904168192}
   - {fileID: 113264110}
-  _fallTime: 0.4
+  _fallTime: 0.7
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

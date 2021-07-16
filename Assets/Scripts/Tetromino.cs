@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tetromino : MonoBehaviour
 {
     [SerializeField] private Vector3 rotationPoint;
+    [SerializeField] private bool _turn;
 
     private static int _width;
     private static int _height;
@@ -36,7 +37,7 @@ public class Tetromino : MonoBehaviour
             PositionMovement(new Vector3(1f, 0f, 0f));
         else if (Input.GetKeyDown(KeyCode.W))
         {
-            transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
+            transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), _turn ? 90 : 0);
             if(!ValidMove())
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
         }
